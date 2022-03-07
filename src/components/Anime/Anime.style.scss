@@ -1,0 +1,42 @@
+.card {
+    background-color: #796c6c !important;
+// margin: 1rem 0;
+    display: flex;
+    transition: box-shadow 0.2s ease-in-out;
+&:hover {
+     -webkit-box-shadow: 0px 0px 13px 1px rgba(255,255,255,1);
+     -moz-box-shadow: 0px 0px 13px 1px rgba(255,255,255,1);
+     box-shadow: 0px 0px 13px 1px rgba(255,255,255,1);
+ }
+
+&-link {
+     text-decoration: none;
+ }
+
+* {
+    padding: 0;
+    margin: 0;
+}
+&-anime-image {
+     min-width: 100px;
+     min-height: 120px;
+ }
+&-anime-content{
+     flex-grow: 1;
+     display: flex;
+     flex-direction: column;
+     justify-content: space-between;
+ }
+&-anime-platforms {
+     list-style-type: none;
+     display: flex;
+     justify-content: flex-end;
+ }
+&-anime-platform {
+     padding: 0 0.2rem;
+ }
+.platform-logo {
+    height: 20px;
+}
+}
+

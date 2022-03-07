@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import "./assets/css/styles.css";
+import NotFound from "./components/NotFound";
+import {BrowserRouter, Route, Switch} from "react-router-dom";
+import Header from "./components/Common/Header";
+import HomePage from "./pages/Home/HomePage";
+import AnimeContextProvider from "./contexts/AnimeContext";
+import Footer from "./components/Common/Footer";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => (
+    <BrowserRouter>
+        <Header/>
+        <Switch>
+            <Route exact path="/">
+                {<AnimeContextProvider>
+                    <HomePage/>
+                </AnimeContextProvider>}
+            </Route>
+            <Route path="/lyrics/track/:commontrack_id">
+                {/*          <LyricsContextProvider>
+            <Lyrics />
+          </LyricsContextProvider>*/}
+            </Route>
+            <Route component={NotFound}/>
+        </Switch>
+        <Footer/>
+    </BrowserRouter>
+);
 
 export default App;
