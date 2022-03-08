@@ -1,7 +1,8 @@
 import React, {createContext, useState, useEffect} from "react";
 import {search, topMovies, topUncoming} from "../constans";
 
-
+const dotenv = require('dotenv');
+dotenv.config();
 export const AnimeContext = createContext();
 
 const AnimeContextProvider = ({children}) => {
@@ -21,8 +22,8 @@ const AnimeContextProvider = ({children}) => {
         fetch(search(anime), {
             "method": "GET",
             "headers": {
-                "x-rapidapi-host": "jikan1.p.rapidapi.com",
-                "x-rapidapi-key": "0e274b1d45mshf1eaad7d4827458p1c2364jsnccda405a47f9"
+                "x-rapidapi-host": process.env.API_HOST,
+                "x-rapidapi-key": process.env.API_KEY
             }
         })
             .then(response => {
