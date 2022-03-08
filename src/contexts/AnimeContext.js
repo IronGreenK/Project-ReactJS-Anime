@@ -1,5 +1,7 @@
 import React, {createContext, useEffect, useState} from "react";
-import {search, topMovies, topUncoming} from "../constans";
+import {search, searchAnimeTitle, topMovies, topUncoming} from "../constans";
+import async from "async";
+import PropTypes from "prop-types";
 
 const dotenv = require('dotenv');
 dotenv.config();
@@ -9,35 +11,31 @@ const AnimeContextProvider = ({children}) => {
     const [doneTopAnime, setDoneTopAnime] = useState(false);
     const [doneTopMovie, setDoneTopMovie] = useState(false);
     const [doneSearchAnime, setDoneSearchAnime] = useState(false);
+    const [controlError, setControlError] = useState(false);
     const [anime, setAnime] = useState([]);
     const [movie, setMovie] = useState([]);
-    const [topUpcoming, setTopUncoming] = useState([]);
+    const [searchedAnime,setSearchedAnime] = useState([]);
     const type = "anime";
 
-    useEffect(() => searchAnime(), []);
     useEffect(() => getTopUpcoming(), []);
     useEffect(() => getTopMovie(), []);
 
-    const searchAnime = (anime) => {
-        fetch(search(anime), {
+    const searchAnime = async (title) => {
+        await fetch(searchAnimeTitle(title), {
             "method": "GET",
             "headers": {
-                "x-rapidapi-host": process.env.API_HOST,
-                "x-rapidapi-key": process.env.API_KEY
+                "x-rapidapi-host": "jikan1.p.rapidapi.com",
+                "x-rapidapi-key": "ad63b3b5e9msh04cc987ff613dc0p149ed6jsn3c2b609178fa"
             }
-        })
-            .then(response => {
-                response.json()
-            })
-            .then(data => {
-                setDoneTopAnime(false);
+        })  .then((res) => res.json())
+            .then((data) => {
                 setDoneSearchAnime(true);
-                setDoneTopAnime(false)
-                setAnime(data.results)
-
+                setSearchedAnime(data.results)
             })
             .catch(err => {
-                console.error(err);
+                console.log(err)
+                setControlError(true);
+
             });
     }
 
@@ -46,7 +44,7 @@ const AnimeContextProvider = ({children}) => {
             "method": "GET",
             "headers": {
                 "x-rapidapi-host": "jikan1.p.rapidapi.com",
-                "x-rapidapi-key": "0e274b1d45mshf1eaad7d4827458p1c2364jsnccda405a47f9"
+                "x-rapidapi-key": "ad63b3b5e9msh04cc987ff613dc0p149ed6jsn3c2b609178fa"
             }
         })
             .then((res) => res.json())
@@ -63,7 +61,7 @@ const AnimeContextProvider = ({children}) => {
             "method": "GET",
             "headers": {
                 "x-rapidapi-host": "jikan1.p.rapidapi.com",
-                "x-rapidapi-key": "0e274b1d45mshf1eaad7d4827458p1c2364jsnccda405a47f9"
+                "x-rapidapi-key": "ad63b3b5e9msh04cc987ff613dc0p149ed6jsn3c2b609178fa"
             }
         })
             .then((res) => res.json())
@@ -75,25 +73,29 @@ const AnimeContextProvider = ({children}) => {
             .catch((err) => console.log(err));
     };
 
-
-    const validateQAnime = (e) => {
+    const validateAnime = async (e) => {
         let q_anime = e.target.value.toLowerCase().trim();
         if (e.type === 'keypress' && e.key === 'Enter') {
-            if (q_anime) {
-                //setCurrentQGame(q_anime);
+            if (q_anime.length >= 3) {
                 setDoneTopAnime(false);
                 setDoneTopMovie(false);
                 setDoneSearchAnime(false);
-                //getSearchedGames(q_anime);
+                await searchAnime(q_anime);
+            }else{
+                setControlError(true);
             }
         }
     };
 
     return (
-        <AnimeContext.Provider value={{anime, movie, doneTopAnime, doneTopMovie, doneSearchAnime, validateQAnime}}>
+        <AnimeContext.Provider value={{anime, movie, doneTopAnime, doneTopMovie, doneSearchAnime, validateAnime,searchedAnime,controlError}}>
             {children}
         </AnimeContext.Provider>
     );
 };
+
+AnimeContextProvider.propTypes = {
+    anime: PropTypes.array
+}
 
 export default AnimeContextProvider;

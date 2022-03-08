@@ -4,6 +4,8 @@ import {AnimeContext} from "../../contexts/AnimeContext";
 import Message from "../../components/Common/Message";
 import ProgressBar from "../../components/Common/ProgressBar";
 import ListOfAnime from "../../components/ListOfAnime/ListOfAnime";
+import SearchBar from "../../components/Animes/SearchBar/SearchBar";
+import Anime from "../../components/Animes/Anime/Anime";
 
 const HomePage = () => {
     const {
@@ -12,14 +14,18 @@ const HomePage = () => {
         doneTopAnime,
         doneSearchAnime,
         doneTopMovie,
-        validateQAnime
+        validateAnime,
+        searchedAnime,
+        controlError,
     } = useContext(AnimeContext);
     return (
         <Fragment>
+            <SearchBar validateAnime={validateAnime} />
             <Grid container spacing={2} style={{marginTop: '1rem'}}>
-                {!doneSearchAnime ? (
+                {!doneSearchAnime? (
                     doneTopAnime &&
-                    doneTopMovie ? (
+                    doneTopMovie
+                     ? (
                         <ListOfAnime
                             upcomingAnimes={anime}
                             moviesAnime={movie}
@@ -27,7 +33,9 @@ const HomePage = () => {
                     ) : (
                         <ProgressBar/>
                     )
-                ) : (
+                ) : searchedAnime.length ? (
+                    <Anime animes={searchedAnime} />
+                ): (
                     <Message text="No results found"/>
                 )}
             </Grid>

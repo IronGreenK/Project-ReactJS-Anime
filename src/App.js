@@ -15,11 +15,6 @@ const App = () => (
                     <HomePage/>
                 </AnimeContextProvider>}
             </Route>
-            <Route path="/lyrics/track/:commontrack_id">
-                {/*          <LyricsContextProvider>
-            <Lyrics />
-          </LyricsContextProvider>*/}
-            </Route>
             <Route component={NotFound}/>
         </Switch>
         <Footer/>

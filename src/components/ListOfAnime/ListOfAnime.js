@@ -1,6 +1,6 @@
 import React, {Fragment} from "react";
 import {Grid, Paper} from "@material-ui/core";
-import Anime from "../Anime/Anime";
+import Anime from "../Animes/Anime/Anime";
 import PropTypes from "prop-types";
 
 const ListOfAnimes = ({upcomingAnimes, moviesAnime}) => (
@@ -26,8 +26,8 @@ const ListOfAnimes = ({upcomingAnimes, moviesAnime}) => (
 );
 
 ListOfAnimes.propTypes = {
-    upcomingAnimes: PropTypes.string,
-    moviesAnime: PropTypes.string
+    upcomingAnimes: PropTypes.array,
+    moviesAnime: PropTypes.array
 }
 
 export default ListOfAnimes;

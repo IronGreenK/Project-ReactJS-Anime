@@ -2,7 +2,6 @@ import React, {Fragment} from "react";
 import {Card, CardContent, CardMedia, Grid} from "@material-ui/core";
 
 const Anime = ({animes, listofanimes}) => {
-
     return (
         <Fragment>
             {animes.map((anime) => {
@@ -20,10 +19,10 @@ const Anime = ({animes, listofanimes}) => {
                     type,
                     url
                 } = anime;
-                console.log(image_url)
+
                 const imgSrc = image_url
                     ? image_url
-                    : require("../../assets/img/placeholder.png");
+                    : require("../../../assets/img/placeholder.png");
                 return (
                     <Grid key={mal_id} item xs={12} sm={listofanimes ? 12 : 6} md={listofanimes ? 12 : 4}>
                         <Card variant="outlined" className="card">
