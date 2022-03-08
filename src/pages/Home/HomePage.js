@@ -1,5 +1,5 @@
 import {Fragment, useContext} from "react";
-import {Grid, Paper} from "@material-ui/core";
+import {Grid} from "@material-ui/core";
 import {AnimeContext} from "../../contexts/AnimeContext";
 import Message from "../../components/Common/Message";
 import ProgressBar from "../../components/Common/ProgressBar";

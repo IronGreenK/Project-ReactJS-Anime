@@ -1,4 +1,4 @@
-import React, {createContext, useState, useEffect} from "react";
+import React, {createContext, useEffect, useState} from "react";
 import {search, topMovies, topUncoming} from "../constans";
 
 const dotenv = require('dotenv');
@@ -42,11 +42,11 @@ const AnimeContextProvider = ({children}) => {
     }
 
     const getTopUpcoming = () => {
-        fetch(topUncoming(type),{
+        fetch(topUncoming(type), {
             "method": "GET",
-                "headers": {
+            "headers": {
                 "x-rapidapi-host": "jikan1.p.rapidapi.com",
-                    "x-rapidapi-key": "0e274b1d45mshf1eaad7d4827458p1c2364jsnccda405a47f9"
+                "x-rapidapi-key": "0e274b1d45mshf1eaad7d4827458p1c2364jsnccda405a47f9"
             }
         })
             .then((res) => res.json())
@@ -59,7 +59,7 @@ const AnimeContextProvider = ({children}) => {
     };
 
     const getTopMovie = () => {
-        fetch(topMovies(type),{
+        fetch(topMovies(type), {
             "method": "GET",
             "headers": {
                 "x-rapidapi-host": "jikan1.p.rapidapi.com",
@@ -78,7 +78,7 @@ const AnimeContextProvider = ({children}) => {
 
     const validateQAnime = (e) => {
         let q_anime = e.target.value.toLowerCase().trim();
-        if(e.type === 'keypress' && e.key === 'Enter') {
+        if (e.type === 'keypress' && e.key === 'Enter') {
             if (q_anime) {
                 //setCurrentQGame(q_anime);
                 setDoneTopAnime(false);
@@ -90,7 +90,7 @@ const AnimeContextProvider = ({children}) => {
     };
 
     return (
-        <AnimeContext.Provider value={{anime,movie, doneTopAnime,doneTopMovie, doneSearchAnime, validateQAnime}}>
+        <AnimeContext.Provider value={{anime, movie, doneTopAnime, doneTopMovie, doneSearchAnime, validateQAnime}}>
             {children}
         </AnimeContext.Provider>
     );

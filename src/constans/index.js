@@ -1,4 +1,3 @@
-
 //Base URL
 const base_url = "https://jikan1.p.rapidapi.com/";
 

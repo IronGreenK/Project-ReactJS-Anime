@@ -1,13 +1,25 @@
 import React, {Fragment} from "react";
 import {Card, CardContent, CardMedia, Grid} from "@material-ui/core";
 
-const Anime = ({ animes, listofanimes }) => {
+const Anime = ({animes, listofanimes}) => {
 
     return (
         <Fragment>
             {animes.map((anime) => {
                 //const { id, background_image, name, released, parent_platforms } = game;
-                const { end_date, episodes, image_url, mal_id, membersm,rank,score,start_date,title,type,url } = anime;
+                const {
+                    end_date,
+                    episodes,
+                    image_url,
+                    mal_id,
+                    membersm,
+                    rank,
+                    score,
+                    start_date,
+                    title,
+                    type,
+                    url
+                } = anime;
                 console.log(image_url)
                 const imgSrc = image_url
                     ? image_url
@@ -26,9 +38,11 @@ const Anime = ({ animes, listofanimes }) => {
                                 </div>
                             </CardContent>
                         </Card>
-                        <Card><div>
-                            <img className="card-anime-image" src={imgSrc} alt=""/>
-                        </div></Card>
+                        <Card>
+                            <div>
+                                <img className="card-anime-image" src={imgSrc} alt=""/>
+                            </div>
+                        </Card>
                     </Grid>
                 );
             })}
